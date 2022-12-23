@@ -38,6 +38,20 @@ public class UsersController {
 		return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
 	}
 	
+	@PutMapping("{id}")
+	public ResponseEntity putUser(@PathVariable int id, @RequestBody User user) {
+		if(id != user.getId()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		Optional<User> x = userRepo.findById(user.getId());
+		if(x.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		userRepo.save(user);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	
 	
 	
 	
