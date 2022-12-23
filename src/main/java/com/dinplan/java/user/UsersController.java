@@ -28,5 +28,19 @@ public class UsersController {
 		}
 		return new ResponseEntity<User>(user.get(), HttpStatus.OK);
 	}
+	
+	@PostMapping
+	public ResponseEntity<User> postUser(@RequestBody User user){
+		if(user.getId() !=0 || user == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		User newUser = userRepo.save(user);
+		return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
+	}
+	
+	
+	
+	
+	
 
 }
