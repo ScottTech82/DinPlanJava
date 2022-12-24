@@ -38,6 +38,7 @@ public class UsersController {
 		return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@PutMapping("{id}")
 	public ResponseEntity putUser(@PathVariable int id, @RequestBody User user) {
 		if(id != user.getId()) {
@@ -48,6 +49,18 @@ public class UsersController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		userRepo.save(user);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@DeleteMapping("{id}")
+	public ResponseEntity deleteUser(@PathVariable int id) {
+		Optional<User> user = userRepo.findById(id);
+		if(user.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		var x = user.get();
+		userRepo.delete(x);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
