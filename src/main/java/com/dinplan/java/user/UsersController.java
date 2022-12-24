@@ -29,6 +29,15 @@ public class UsersController {
 		return new ResponseEntity<User>(user.get(), HttpStatus.OK);
 	}
 	
+	@GetMapping("username/{username}")
+	public ResponseEntity<User> getUserByCode(@PathVariable String code) {
+		Optional<User> user = userRepo.findByCode(code);
+		if(user.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<User>(user.get(),HttpStatus.OK);
+	}
+	
 	@PostMapping
 	public ResponseEntity<User> postUser(@RequestBody User user){
 		if(user.getId() !=0 || user == null) {
