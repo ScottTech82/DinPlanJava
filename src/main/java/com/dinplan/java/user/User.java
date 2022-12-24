@@ -1,6 +1,11 @@
 package com.dinplan.java.user;
 
+import java.util.List;
+
 import javax.persistence.*;
+
+import com.dinplan.java.meal.Meal;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 
@@ -16,12 +21,28 @@ public class User {
 	@Column(length=30, nullable=true)
 	private String favorite;
 
+	@JsonManagedReference
+	@OneToMany(mappedBy="user")
+	private List<Meal> meals;
+	
 	
 	
 	public User() {}
 
 	
 	
+	public List<Meal> getMeals() {
+		return meals;
+	}
+
+
+
+	public void setMeals(List<Meal> meals) {
+		this.meals = meals;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

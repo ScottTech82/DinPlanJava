@@ -2,6 +2,9 @@ package com.dinplan.java.meal;
 
 import javax.persistence.*;
 
+import com.dinplan.java.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity(name="Meals")
 @Table
@@ -22,6 +25,12 @@ public class Meal {
 	private int cookTemp;
 
 	private int cookTime;
+	
+	@JsonBackReference
+	@ManyToOne(optional=false)
+	@JoinColumn(name="userId", columnDefinition="int")
+	private User user;
+	
 	
 	public Meal() {}
 	
