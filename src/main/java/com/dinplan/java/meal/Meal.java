@@ -33,6 +33,88 @@ public class Meal {
 	
 	
 	public Meal() {}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getCookType() {
+		return cookType;
+	}
+
+
+	public void setCookType(String cookType) {
+		this.cookType = cookType;
+	}
+
+
+	public int getCookTemp() {
+		return cookTemp;
+	}
+
+
+	public void setCookTemp(int cookTemp) {
+		this.cookTemp = cookTemp;
+	}
+
+
+	public int getCookTime() {
+		return cookTime;
+	}
+
+
+	public void setCookTime(int cookTime) {
+		this.cookTime = cookTime;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 	
 
 }
