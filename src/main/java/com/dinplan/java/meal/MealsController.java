@@ -32,7 +32,7 @@ public class MealsController {
 		return new ResponseEntity<Meal>(meal.get(), HttpStatus.OK );
 	}
 	
-	@PostMapping("{id}")
+	@PostMapping
 	public ResponseEntity<Meal> postMeal(@RequestBody Meal meal) {
 		if(meal.getId() != 0 || meal == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -40,5 +40,20 @@ public class MealsController {
 		Meal newMeal = mealRepo.save(meal);
 		return new ResponseEntity<Meal>(newMeal, HttpStatus.OK);
 	}
+	
+	@PutMapping("{id}")
+	public ResponseEntity<Meal> putMeal(@PathVariable int id, @RequestBody Meal meal) {
+		if(id != meal.getId()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}	
+		Optional<Meal> x = mealRepo.findById(meal.getId());
+		if(x.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		mealRepo.save(meal);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	
 
 }
