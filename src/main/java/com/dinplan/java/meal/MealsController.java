@@ -54,6 +54,16 @@ public class MealsController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
+	@DeleteMapping("{id}")
+	public ResponseEntity<Meal> deleteMeal(@PathVariable int id) {
+		Optional<Meal> meal = mealRepo.findById(id);
+		if(meal.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		var x = meal.get();
+		mealRepo.delete(x);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 	
 
 }
