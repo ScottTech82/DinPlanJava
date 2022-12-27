@@ -32,5 +32,13 @@ public class MealsController {
 		return new ResponseEntity<Meal>(meal.get(), HttpStatus.OK );
 	}
 	
+	@PostMapping("{id}")
+	public ResponseEntity<Meal> postMeal(@RequestBody Meal meal) {
+		if(meal.getId() != 0 || meal == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		Meal newMeal = mealRepo.save(meal);
+		return new ResponseEntity<Meal>(newMeal, HttpStatus.OK);
+	}
 
 }
