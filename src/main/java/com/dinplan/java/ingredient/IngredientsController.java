@@ -31,5 +31,14 @@ public class IngredientsController {
 		return new ResponseEntity<Ingredient>(ingredient.get(), HttpStatus.OK);
 	}
 	
+	@PostMapping
+	public ResponseEntity<Ingredient> postIngredient(@RequestBody Ingredient ingredient) {
+		if(ingredient.getId() != 0 || ingredient == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		Ingredient newIngd = ingRepo.save(ingredient);
+		return new ResponseEntity<Ingredient>(newIngd, HttpStatus.OK);
+	}
+	
 
 }
