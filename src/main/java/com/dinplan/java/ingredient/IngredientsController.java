@@ -40,5 +40,19 @@ public class IngredientsController {
 		return new ResponseEntity<Ingredient>(newIngd, HttpStatus.OK);
 	}
 	
+	@PutMapping("{id}")
+	public ResponseEntity<Ingredient> putIngredient(@PathVariable int id, @RequestBody Ingredient ingredient) {
+		if(id != ingredient.getId()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}	
+		Optional<Ingredient> x = ingRepo.findById(ingredient.getId());
+		if(x.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		ingRepo.save(ingredient);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	
 
 }
