@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping
+@RequestMapping("/api/ingredients")
 public class IngredientsController {
 	
 	@Autowired
@@ -23,7 +23,7 @@ public class IngredientsController {
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<Ingredient> getIngredient(@PathVariable int id) {
+	public ResponseEntity<Ingredient> getIngredientByPK(@PathVariable int id) {
 		Optional<Ingredient> ingredient = ingRepo.findById(id);
 		if(ingredient.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -40,8 +40,9 @@ public class IngredientsController {
 		return new ResponseEntity<Ingredient>(newIngd, HttpStatus.OK);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@PutMapping("{id}")
-	public ResponseEntity<Ingredient> putIngredient(@PathVariable int id, @RequestBody Ingredient ingredient) {
+	public ResponseEntity putIngredient(@PathVariable int id, @RequestBody Ingredient ingredient) {
 		if(id != ingredient.getId()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}	
@@ -53,8 +54,10 @@ public class IngredientsController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
+	
+	@SuppressWarnings("rawtypes")
 	@DeleteMapping("{id}")
-	public ResponseEntity<Ingredient> deleteIngredient(@PathVariable int id) {
+	public ResponseEntity deleteIngredient(@PathVariable int id) {
 		Optional<Ingredient> ing = ingRepo.findById(id);
 		if(ing.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
