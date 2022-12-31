@@ -41,8 +41,9 @@ public class MealsController {
 		return new ResponseEntity<Meal>(newMeal, HttpStatus.OK);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@PutMapping("{id}")
-	public ResponseEntity<Meal> putMeal(@PathVariable int id, @RequestBody Meal meal) {
+	public ResponseEntity putMeal(@PathVariable int id, @RequestBody Meal meal) {
 		if(id != meal.getId()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}	
@@ -54,8 +55,9 @@ public class MealsController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@DeleteMapping("{id}")
-	public ResponseEntity<Meal> deleteMeal(@PathVariable int id) {
+	public ResponseEntity deleteMeal(@PathVariable int id) {
 		Optional<Meal> meal = mealRepo.findById(id);
 		if(meal.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

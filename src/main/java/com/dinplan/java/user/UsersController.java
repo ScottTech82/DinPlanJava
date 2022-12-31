@@ -47,6 +47,7 @@ public class UsersController {
 		return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
 	}
 	
+	
 	@SuppressWarnings("rawtypes")
 	@PutMapping("{id}")
 	public ResponseEntity putUser(@PathVariable int id, @RequestBody User user) {
