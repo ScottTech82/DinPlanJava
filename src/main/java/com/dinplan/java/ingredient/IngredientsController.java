@@ -53,6 +53,15 @@ public class IngredientsController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
-	
+	@DeleteMapping("{id}")
+	public ResponseEntity<Ingredient> deleteIngredient(@PathVariable int id) {
+		Optional<Ingredient> ing = ingRepo.findById(id);
+		if(ing.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		var x = ing.get();
+		ingRepo.delete(x);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 
 }
